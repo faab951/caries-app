@@ -43,36 +43,47 @@ page = st.sidebar.selectbox("Navigate", [
 def home():
     if lang == "English":
         st.title("NoCaries: Cavity Prevention for Lifelong Oral Health")
-        st.markdown("""Welcome to **NoCaries**, a luxury bilingual platform for modern oral health education.""")
+        st.markdown("""
+Welcome to **NoCaries**, a luxury bilingual platform for modern oral health education.  
+Use the sidebar to navigate through interactive tools designed to help you understand and prevent dental caries effectively.
+""")
     else:
         st.title("نوكاريس: الوقاية من التسوس لصحة فموية تدوم")
-        st.markdown("مرحبًا بكم في **نوكاريس**، منصة ثنائية اللغة لتعليم صحة الفم بأسلوب عصري.")
+        st.markdown("""
+مرحبًا بكم في **نوكاريس**، منصة ثنائية اللغة للتثقيف الصحي الفموي بأسلوب راقٍ.  
+استخدم القائمة الجانبية لاستكشاف أدوات تفاعلية تساعدك على فهم تسوس الأسنان والوقاية منه.
+""")
 
 def what_is_caries():
     st.title("What is Dental Caries?" if lang == "English" else "ما هو تسوس الأسنان؟")
     st.image("https://www.cdc.gov/oralhealth/images/cavities.jpg", use_column_width=True)
-    if lang == "English":
-        st.markdown("""
-Dental caries is a bacterial process causing tooth decay.  
-**Stages**: White spot → Enamel decay → Dentin → Pulp → Abscess
-""")
-    else:
-        st.markdown("""
-تسوس الأسنان هو عملية بكتيرية تؤدي إلى تآكل السن.  
-**المراحل**: بقعة بيضاء → تسوس المينا → العاج → اللب → خراج
-""")
+    content_en = """**Dental caries** is a bacterial process that causes destruction of the tooth's hard tissues by acid produced from sugar.  
+**Stages:**  
+- White spot lesion  
+- Enamel breakdown  
+- Dentin involvement  
+- Pulp exposure  
+- Abscess or tooth loss"""
+    content_ar = """**تسوس الأسنان** هو عملية بكتيرية تؤدي إلى تآكل الأنسجة الصلبة للسن نتيجة الأحماض الناتجة عن السكريات.  
+**المراحل:**  
+- بقعة بيضاء  
+- تآكل المينا  
+- إصابة العاج  
+- تعرض اللب  
+- خراج أو فقدان السن"""
+    st.markdown(content_en if lang == "English" else content_ar)
 
 def myth_busters():
     st.title("Myth Busters" if lang == "English" else "كشف الخرافات")
     myths = {
-        "Only kids get cavities": "Anyone can.",
-        "You don't need to floss": "Flossing is essential.",
-        "No pain = No cavity": "Early decay is painless."
+        "Only kids get cavities": "Anyone with teeth can get cavities.",
+        "Flossing isn’t necessary if you brush": "Brushing only cleans 60% of surfaces.",
+        "If it doesn't hurt, it’s not a cavity": "Cavities often don't hurt until they're advanced."
     }
     myths_ar = {
-        "فقط الأطفال يصابون بالتسوس": "أي شخص يمكن أن يصاب.",
-        "لا حاجة للخيط": "الخيط ضروري.",
-        "عدم وجود ألم = لا يوجد تسوس": "التسوس المبكر غير مؤلم."
+        "فقط الأطفال يصابون بالتسوس": "أي شخص لديه أسنان يمكن أن يصاب بالتسوس.",
+        "لا حاجة لاستخدام الخيط إذا قمت بالتفريش": "التفريش ينظف فقط 60٪ من الأسطح.",
+        "إذا لم يكن هناك ألم، فلا يوجد تسوس": "التسوس لا يسبب ألمًا حتى يصبح متقدمًا."
     }
     data = myths if lang == "English" else myths_ar
     for myth, truth in data.items():
@@ -81,75 +92,85 @@ def myth_busters():
 
 def risk_calculator():
     st.title("Caries Risk Calculator" if lang == "English" else "حاسبة خطر التسوس")
-    sugar = st.radio("Do you eat sugar daily?" if lang == "English" else "هل تتناول السكر يوميًا؟", ["Yes", "No"])
-    brush = st.radio("Brush twice daily?" if lang == "English" else "هل تفرّش مرتين يوميًا؟", ["Yes", "No"])
-    risk = "High" if sugar == "Yes" and brush == "No" else "Moderate" if sugar == "Yes" else "Low"
-    st.success(f"Your risk is: {risk}" if lang == "English" else f"مستوى الخطر: {'مرتفع' if risk=='High' else 'متوسط' if risk=='Moderate' else 'منخفض'}")
+    sugar = st.radio("Do you eat sugary snacks daily?" if lang == "English" else "هل تتناول الحلويات يوميًا؟", ["Yes", "No"])
+    brushing = st.radio("Do you brush twice a day?" if lang == "English" else "هل تفرّش مرتين يوميًا؟", ["Yes", "No"])
+    flossing = st.radio("Do you floss daily?" if lang == "English" else "هل تستخدم الخيط يوميًا؟", ["Yes", "No"])
+    risk = "Low"
+    if sugar == "Yes" and brushing == "No":
+        risk = "High"
+    elif sugar == "Yes" or brushing == "No":
+        risk = "Moderate"
+    label = {"Low": "منخفض", "Moderate": "متوسط", "High": "مرتفع"}
+    st.success(f"Your risk level is: {risk}" if lang == "English" else f"مستوى الخطر لديك: {label[risk]}")
 
 def oral_hygiene():
     st.title("Oral Hygiene Guide" if lang == "English" else "دليل العناية الفموية")
     st.image("https://www.cdc.gov/oralhealth/images/how-to-brush-300px.jpg", use_column_width=True)
-    if lang == "English":
-        st.markdown("- Brush twice daily  
+    content_en = """- Brush twice daily with fluoride toothpaste  
 - Floss once daily  
-- Use fluoride toothpaste")
-    else:
-        st.markdown("- فرّش مرتين يوميًا  
+- Replace your toothbrush every 3 months  
+- Clean your tongue and gums  
+- Avoid rinsing immediately after brushing"""
+    content_ar = """- فرّش مرتين يوميًا بمعجون يحتوي على الفلورايد  
 - استخدم الخيط مرة يوميًا  
-- استخدم معجون يحتوي على الفلورايد")
+- استبدل فرشاتك كل 3 أشهر  
+- نظف لسانك ولثتك  
+- لا تشطف فمك مباشرة بعد التفريش"""
+    st.markdown(content_en if lang == "English" else content_ar)
 
 def prevention_plan():
-    st.title("Build Your Prevention Plan" if lang == "English" else "أنشئ خطة الوقاية")
-    age = st.slider("Your age" if lang == "English" else "عمرك", 5, 80, 25)
-    sugar = st.radio("Do you snack on sweets?" if lang == "English" else "هل تتناول الحلويات؟", ["Yes", "No"])
-    brushing = st.radio("How often do you brush?" if lang == "English" else "كم مرة تفرّش؟", ["Once", "Twice", "More than Twice"])
-    st.subheader("Suggested Plan" if lang == "English" else "الخطة المقترحة")
-    if brushing == "Once":
-        st.write("- Brush twice daily with fluoride")
+    st.title("Your Prevention Plan" if lang == "English" else "خطة الوقاية الخاصة بك")
+    age = st.slider("Select your age" if lang == "English" else "اختر عمرك", 5, 80, 25)
+    brushing = st.radio("Brushing frequency?" if lang == "English" else "عدد مرات التفريش؟", ["Once", "Twice", "More than Twice"])
+    sugar = st.radio("Do you snack on sugary foods?" if lang == "English" else "هل تتناول وجبات خفيفة سكرية؟", ["Yes", "No"])
+    st.subheader("Your Plan" if lang == "English" else "خطة العناية")
+    st.write("- Brush 2x daily with fluoride")
     if sugar == "Yes":
-        st.write("- Reduce sugar intake and rinse after snacks")
-    st.write("- Visit dentist every 6 months")
+        st.write("- Reduce sugary snacks and rinse mouth after eating")
+    if brushing == "Once":
+        st.write("- Increase brushing to at least twice daily")
 
 def case_scenarios():
     st.title("Case Scenario" if lang == "English" else "سيناريو واقعي")
     if lang == "English":
-        choice = st.radio("Ali brushes once/day and drinks soda daily. What should he do?", ["Brush more often", "Nothing", "Drink more water"])
-        st.success("Correct" if choice == "Brush more often" else "That's not ideal. Try again.")
+        q = st.radio("Ali is 16, brushes once a day, drinks soda at night. What should he do?", ["Nothing", "Drink water", "Brush twice + reduce soda"])
+        st.success("Correct choice!" if q == "Brush twice + reduce soda" else "Think again.")
     else:
-        choice = st.radio("علي يفرّش مرة واحدة يوميًا ويشرب الصودا. ماذا يجب أن يفعل؟", ["يفرّش أكثر", "لا شيء", "يشرب ماء أكثر"])
-        st.success("إجابة صحيحة" if choice == "يفرّش أكثر" else "ليست الأفضل، حاول مرة أخرى.")
+        q = st.radio("علي عمره ١٦ سنة، يفرّش مرة ويشرب صودا مساءً. ماذا عليه أن يفعل؟", ["لا شيء", "يشرب ماء", "يفرّش مرتين ويقلل الصودا"])
+        st.success("إجابة صحيحة!" if q == "يفرّش مرتين ويقلل الصودا" else "أعد التفكير.")
 
 def quiz():
     st.title("Caries Prevention Quiz" if lang == "English" else "اختبار الوقاية من التسوس")
     score = 0
-    q1 = st.radio("1. Ideal brushing frequency?", ["Once", "Twice", "After every snack"])
-    if q1 == "Twice": score += 1
-    q2 = st.radio("2. What causes caries?", ["Cold", "Sugar + bacteria", "Water"])
-    if q2 == "Sugar + bacteria": score += 1
+    if st.radio("1. How often should you brush?", ["Once", "Twice", "After snacks"]) == "Twice":
+        score += 1
+    if st.radio("2. Is fluoride helpful?", ["Yes", "No"]) == "Yes":
+        score += 1
+    if st.radio("3. Can sugar cause cavities?", ["Yes", "No"]) == "Yes":
+        score += 1
     if st.button("Submit"):
-        st.success(f"You scored {score}/2" if lang == "English" else f"نتيجتك {score} من 2")
+        st.success(f"Your score: {score}/3" if lang == "English" else f"نتيجتك: {score} من 3")
 
 def faq():
     st.title("Frequently Asked Questions" if lang == "English" else "الأسئلة الشائعة")
     faqs = {
-        "Can cavities heal on their own?": "No, they need treatment.",
+        "Do cavities heal on their own?": "No, they need dental treatment.",
         "How often should I visit the dentist?": "Every 6 months."
     }
     faqs_ar = {
-        "هل يشفى التسوس من تلقاء نفسه؟": "لا، يحتاج إلى علاج.",
-        "كم مرة أزور طبيب الأسنان؟": "كل 6 أشهر."
+        "هل يشفى التسوس من تلقاء نفسه؟": "لا، يجب علاجه من قبل طبيب الأسنان.",
+        "كم مرة أزور طبيب الأسنان؟": "كل ٦ أشهر."
     }
-    data = faqs if lang == "English" else faqs_ar
-    for question, answer in data.items():
-        with st.expander(question):
-            st.write(answer)
+    for q, a in (faqs if lang == "English" else faqs_ar).items():
+        with st.expander(q):
+            st.write(a)
 
 def about():
     st.title("About NoCaries" if lang == "English" else "حول نوكاريس")
-    st.markdown("This bilingual project is designed to promote oral health education and cavity prevention." if lang == "English"
-                else "هذا المشروع ثنائي اللغة يهدف إلى تعزيز التوعية بصحة الفم والوقاية من التسوس.")
+    st.markdown("Developed by a team of dental students to promote patient awareness and caries prevention." if lang == "English"
+                else "تم تطويره بواسطة فريق من طلاب طب الأسنان لتعزيز الوعي الوقائي للمرضى.")
 
-# --- ROUTER ---
+# --- ROUTING ---
 if page == "🏠 Home": home()
 elif page == "📚 What is Caries?": what_is_caries()
 elif page == "❌ Myth Busters": myth_busters()
