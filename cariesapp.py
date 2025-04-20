@@ -7,27 +7,24 @@ st.set_page_config(page_title="NoCaries", layout="wide")
 # --- STYLING ---
 st.markdown("""
 <style>
-html, body, [class*="css"] {
-    font-family: 'Segoe UI', sans-serif;
+body {
     background-color: #fffaf0;
     color: #333;
-}
-h1, h2 {
-    color: #2c3e50;
-}
-.section {
-    background-color: #f5efe6;
-    padding: 1.5em;
-    border-radius: 10px;
-    margin-bottom: 2em;
+    font-family: 'Segoe UI', sans-serif;
 }
 h1 {
-    font-size: 2.2em;
-    margin-bottom: 0.5em;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 h2 {
-    font-size: 1.6em;
-    margin-bottom: 0.5em;
+    font-size: 1.8rem;
+    margin-top: 1.2rem;
+}
+.section {
+    background-color: #f2e9dc;
+    padding: 1.5em;
+    border-radius: 12px;
+    margin-bottom: 2em;
 }
 .stButton>button {
     background-color: #bfa980;
@@ -58,11 +55,11 @@ def what_is_caries():
     st.markdown("<div class='section'>", unsafe_allow_html=True)
     st.title("What is Dental Caries?")
     stages = {
-        "White Spot": ("https://upload.wikimedia.org/wikipedia/commons/7/74/White_spot_lesions_on_teeth.jpg", "Early sign of enamel demineralization."),
-        "Enamel Decay": ("https://upload.wikimedia.org/wikipedia/commons/1/12/Enamel_Caries.jpg", "Decay begins on enamel surface."),
-        "Dentin Involvement": ("https://upload.wikimedia.org/wikipedia/commons/b/bb/Dental_caries_dentin.jpg", "Decay reaches dentin, progressing faster."),
-        "Pulp Exposure": ("https://upload.wikimedia.org/wikipedia/commons/0/0b/Pulpitis.jpg", "Painful inflammation from pulp involvement."),
-        "Abscess": ("https://upload.wikimedia.org/wikipedia/commons/f/f6/Tooth_abscess.jpg", "Infection at root tip or surrounding tissue.")
+        "White Spot": ("https://www.oralanswers.com/wp-content/uploads/2010/08/white-spot-lesions.jpg", "Early sign of enamel demineralization."),
+        "Enamel Decay": ("https://www.smilesbypayet.com/wp-content/uploads/2010/09/Enamel-decay-starting.jpg", "Decay begins on enamel surface."),
+        "Dentin Involvement": ("https://www.researchgate.net/profile/Marisa-Cronin/publication/305689108/figure/fig1/AS:668939651252224@1536482950742/Caries-lesions-1-Initial-enamel-lesion-2-Deep-dentin-lesion_W640.jpg", "Decay reaches dentin, progressing faster."),
+        "Pulp Exposure": ("https://www.researchgate.net/profile/Renata-Ferreira-5/publication/313524732/figure/fig2/AS:470025172221952@1486646797010/Pulp-exposure-in-mandibular-left-second-molar.jpg", "Painful inflammation from pulp involvement."),
+        "Abscess": ("https://www.smileperfectors.com/wp-content/uploads/2022/04/Dental-Abscess.jpg", "Infection at root tip or surrounding tissue.")
     }
     stage = st.selectbox("Select a stage to explore:", [""] + list(stages.keys()))
     if stage:
