@@ -1,7 +1,7 @@
 
-import streamlit as st
-
 st.set_page_config(page_title="NoCaries", layout="wide")  # Must be FIRST
+
+import streamlit as st
 
 # --- CUSTOM STYLING ---
 st.markdown("""
@@ -37,7 +37,7 @@ page = st.sidebar.selectbox("Navigate", [
     "Oral Hygiene Guide", "Prevention Plan", "Case Scenarios", "Quiz", "FAQ", "About"
 ])
 
-# Combine previously built sections
+# Append the previously built app code parts
 
 import streamlit as st
 
