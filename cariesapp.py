@@ -1,6 +1,6 @@
-st.set_page_config(page_title="NoCaries", layout="wide")  # Must be FIRST
-
 import streamlit as st
+
+st.set_page_config(page_title="NoCaries", layout="wide")  # Must be FIRST
 
 # --- CUSTOM STYLING ---
 st.markdown("""
