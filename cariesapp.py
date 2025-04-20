@@ -1,295 +1,171 @@
 
 import streamlit as st
-st.set_page_config(page_title="NoCaries", layout="wide")  # ✅ Single call and FIRST Streamlit command
+st.set_page_config(page_title="NoCaries", layout="wide")  # Only set ONCE
 
-# --- CUSTOM STYLING ---
+# --- STYLING ---
 st.markdown("""
 <style>
 body {
-    background-color: #fefcfb;
+    background-color: #fdfcf9;
     font-family: 'Segoe UI', sans-serif;
     color: #333;
 }
 h1, h2 {
-    color: #2e3d49;
+    color: #2c3e50;
 }
 .section {
-    background-color: #f2e9e4;
+    background-color: #f2ebe3;
     padding: 2em;
+    border-radius: 12px;
     margin-bottom: 2em;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 .stButton>button {
-    background-color: #a88f74;
+    background-color: #bba47c;
     color: white;
-    border-radius: 8px;
-    padding: 0.5em 1.2em;
     font-size: 1em;
+    padding: 0.5em 1.2em;
+    border-radius: 8px;
 }
 </style>
 """, unsafe_allow_html=True)
 
 # --- NAVIGATION ---
-page = st.sidebar.selectbox("Navigate", [
+page = st.sidebar.radio("Go to", [
     "Home", "What is Caries?", "Myth Busters", "Caries Risk Calculator",
     "Oral Hygiene Guide", "Prevention Plan", "Case Scenarios", "Quiz", "FAQ", "About"
 ])
 
-
-import streamlit as st
-
-# --- PAGE CONFIG ---
-# REMOVED: set_page_config (must be called only once)(page_title="NoCaries", layout="wide")
-
-# --- CUSTOM STYLING ---
-st.markdown("""
-<style>
-body {
-    background-color: #fefcfb;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-}
-h1, h2 {
-    color: #2e3d49;
-}
-.section {
-    background-color: #f2e9e4;
-    padding: 2em;
-    margin-bottom: 2em;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-.stButton>button {
-    background-color: #a88f74;
-    color: white;
-    border-radius: 8px;
-    padding: 0.5em 1.2em;
-    font-size: 1em;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# --- NAVIGATION ---
-page = st.sidebar.selectbox("Navigate", [
-    "Home", "What is Caries?", "Myth Busters", "Caries Risk Calculator",
-    "Oral Hygiene Guide", "Prevention Plan", "Case Scenarios", "Quiz", "FAQ", "About"
-])
-
-# --- FUNCTIONS ---
-def home():
+# --- PAGE FUNCTIONS ---
+if page == "Home":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
     st.title("Welcome to NoCaries")
     st.image("https://cdn.pixabay.com/photo/2017/04/10/22/29/dental-care-2223462_1280.jpg", use_container_width=True)
     st.write("""
-        **NoCaries** is an educational platform designed to help patients and the public understand how dental caries develop, how to prevent them, and how to maintain lifelong oral health.
-        Use the tools and guides throughout this app to learn, assess your risk, and build a prevention plan personalized to your needs.
+    **NoCaries** is your go-to app for understanding, preventing, and managing dental caries.
+    Explore interactive tools, learn with visuals, and assess your caries risk with just a few clicks.
     """)
-    st.subheader("🦷 Explore:")
-    st.markdown("- **Learn about caries stages** and how they affect your teeth")
-    st.markdown("- **Busting myths** about cavities and oral hygiene")
-    st.markdown("- **Interactive risk calculators** and prevention plans")
-    st.markdown("- **Case scenarios and quizzes** to test your knowledge")
     st.markdown("</div>", unsafe_allow_html=True)
 
-def what_is_caries():
+elif page == "What is Caries?":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
     st.title("What is Dental Caries?")
-    st.write("""
-        Dental caries, or tooth decay, is a breakdown of tooth structure caused by acid-producing bacteria. It progresses through multiple stages if left untreated.
-    """)
-    stages = {
-        "White Spot": (
-            "https://upload.wikimedia.org/wikipedia/commons/7/74/White_spot_lesions_on_teeth.jpg",
-            "This is the earliest visible sign of enamel demineralization. A white, chalky area appears due to mineral loss."
-        ),
-        "Enamel Decay": (
-            "https://upload.wikimedia.org/wikipedia/commons/1/12/Enamel_Caries.jpg",
-            "The caries process has penetrated the enamel surface. At this point, the damage is irreversible."
-        ),
-        "Dentin Involvement": (
-            "https://upload.wikimedia.org/wikipedia/commons/b/bb/Dental_caries_dentin.jpg",
-            "Decay moves faster once it enters dentin. Sensitivity may begin."
-        ),
-        "Pulp Exposure": (
-            "https://upload.wikimedia.org/wikipedia/commons/0/0b/Pulpitis.jpg",
-            "When decay reaches the pulp, it often causes pain and inflammation. Root canal treatment may be needed."
-        ),
-        "Abscess": (
-            "https://upload.wikimedia.org/wikipedia/commons/f/f6/Tooth_abscess.jpg",
-            "An abscess is a severe infection. This stage often causes swelling and requires urgent treatment."
-        )
+    stage = st.selectbox("Select a stage to learn more", ["", "White Spot", "Enamel Decay", "Dentin Decay", "Pulp Involvement", "Abscess"])
+    info = {
+        "White Spot": ("https://upload.wikimedia.org/wikipedia/commons/7/74/White_spot_lesions_on_teeth.jpg", "Early demineralization of enamel – reversible with fluoride."),
+        "Enamel Decay": ("https://upload.wikimedia.org/wikipedia/commons/1/12/Enamel_Caries.jpg", "Decay breaks through enamel causing permanent damage."),
+        "Dentin Decay": ("https://upload.wikimedia.org/wikipedia/commons/b/bb/Dental_caries_dentin.jpg", "Decay spreads faster once it reaches dentin."),
+        "Pulp Involvement": ("https://upload.wikimedia.org/wikipedia/commons/0/0b/Pulpitis.jpg", "Pain begins when bacteria reach the pulp."),
+        "Abscess": ("https://upload.wikimedia.org/wikipedia/commons/f/f6/Tooth_abscess.jpg", "Infection leads to swelling and severe pain.")
     }
-    stage = st.selectbox("Select a stage to explore:", [""] + list(stages.keys()))
-    if stage:
-        img, text = stages[stage]
-        st.image(img, use_container_width=True)
-        st.write(text)
+    if stage in info:
+        st.image(info[stage][0], use_container_width=True)
+        st.write(info[stage][1])
     st.markdown("</div>", unsafe_allow_html=True)
 
-def myth_busters():
+elif page == "Myth Busters":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
-    st.title("Caries Myth Busters")
+    st.title("Myth Busters")
     myths = {
-        "Only sugar causes cavities.": "False. While sugar is a major contributor, any fermentable carbohydrate, including bread and fruit, can feed bacteria and produce acid.",
-        "If it doesn’t hurt, it’s not a cavity.": "False. Many cavities are painless in early stages and only cause pain when deep.",
-        "Fluoride is dangerous.": "False. Fluoride in recommended doses is safe and proven to reduce decay.",
-        "Brushing harder cleans better.": "False. Gentle brushing with correct technique is more effective and safer for your gums.",
-        "Kids are the only ones who get cavities.": "False. Adults, especially those with gum recession or dry mouth, are at high risk too."
+        "Sugar is the only cause of cavities.": "False – Any fermentable carbohydrate can cause decay.",
+        "If it doesn’t hurt, it’s not a cavity.": "False – Early caries are painless.",
+        "Fluoride is toxic.": "False – It's safe and protective in correct doses.",
+        "Mouthwash replaces brushing.": "False – It’s only an add-on, not a replacement.",
+        "Adults don’t get cavities.": "False – They do, especially with gum issues."
     }
-    for myth, fact in myths.items():
+    for myth, truth in myths.items():
         with st.expander(myth):
-            st.write(f"✅ {fact}")
+            st.write(truth)
     st.markdown("</div>", unsafe_allow_html=True)
 
-# Placeholder for remaining functions — they will be written below in next cell
-
-st.markdown("<div class='section'>", unsafe_allow_html=True)
-st.title("Loading...")
-st.markdown("</div>", unsafe_allow_html=True)
-
-def caries_risk_calculator():
+elif page == "Caries Risk Calculator":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
     st.title("Caries Risk Calculator")
-    st.write("Answer the questions below to assess your risk of developing dental caries.")
-    sugar = st.radio("How often do you consume sugary snacks or drinks?", ["Rarely", "Sometimes", "Frequently"])
-    brushing = st.radio("How often do you brush your teeth?", ["Once a day", "Twice a day", "More than twice a day"])
-    flossing = st.radio("Do you floss daily?", ["Yes", "No"])
-    dry_mouth = st.radio("Do you experience dry mouth frequently?", ["Yes", "No"])
-
-    score = 0
-    if sugar == "Sometimes": score += 1
-    elif sugar == "Frequently": score += 2
-    if brushing == "Once a day": score += 1
-    elif brushing == "More than twice a day": score -= 1
-    if flossing == "No": score += 1
-    if dry_mouth == "Yes": score += 1
-
-    if st.button("Calculate My Risk"):
+    sugar = st.radio("Do you eat sugary snacks daily?", ["Yes", "No"])
+    brush = st.radio("Do you brush twice a day?", ["Yes", "No"])
+    floss = st.radio("Do you floss daily?", ["Yes", "No"])
+    dry = st.radio("Do you experience dry mouth?", ["Yes", "No"])
+    score = sum([sugar == "Yes", brush == "No", floss == "No", dry == "Yes"])
+    if st.button("Calculate Risk"):
         if score <= 1:
-            st.success("🟢 Low Risk – Keep up the good habits!")
+            st.success("Low risk. Keep up the good work!")
         elif score == 2:
-            st.warning("🟡 Moderate Risk – You can improve a few areas.")
+            st.warning("Moderate risk. Improve one or two habits.")
         else:
-            st.error("🔴 High Risk – Take action to reduce your risk.")
+            st.error("High risk. You need a prevention plan.")
     st.markdown("</div>", unsafe_allow_html=True)
 
-def oral_hygiene_guide():
+elif page == "Oral Hygiene Guide":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
-    st.title("Oral Hygiene Guide")
+    st.title("Oral Hygiene Tips")
     tips = {
-        "Brush Twice Daily": ("https://cdn.pixabay.com/photo/2020/09/25/13/21/toothbrush-5601924_1280.jpg", 
-            "Use fluoride toothpaste and brush for two minutes each morning and night."),
-        "Floss Once Daily": ("https://cdn.pixabay.com/photo/2016/03/05/19/02/dental-floss-1238342_1280.jpg", 
-            "Flossing removes plaque and food particles from between your teeth."),
-        "Use Mouthwash": ("https://cdn.pixabay.com/photo/2021/08/17/13/06/mouthwash-6552301_1280.jpg", 
-            "Use alcohol-free mouthwash to reduce bacteria and freshen breath."),
-        "Limit Sugar Intake": ("https://cdn.pixabay.com/photo/2016/04/13/07/18/sugar-1324237_1280.jpg", 
-            "Reduce snacking on sugary foods and drinks, especially between meals."),
-        "Stay Hydrated": ("https://cdn.pixabay.com/photo/2017/06/10/06/06/bottle-2384733_1280.jpg", 
-            "Drinking water helps wash away food and bacteria and stimulates saliva.")
+        "Brush Twice": "Use fluoride toothpaste and soft brush twice daily.",
+        "Floss Daily": "Cleans between teeth where brush can't reach.",
+        "Mouthwash": "Use alcohol-free fluoride rinse at night.",
+        "Limit Sugar": "Avoid frequent snacks and sugary drinks.",
+        "Drink Water": "Helps flush food and acids between meals."
     }
-    for tip, (img, desc) in tips.items():
-        st.image(img, caption=tip, use_container_width=True)
-        st.write(f"**{tip}**: {desc}")
+    for t, d in tips.items():
+        st.subheader(t)
+        st.write(d)
     st.markdown("</div>", unsafe_allow_html=True)
 
-def prevention_plan():
+elif page == "Prevention Plan":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
-    st.title("Prevention Plan Builder")
-    brushing = st.selectbox("How often do you brush?", ["Once", "Twice", "More than twice"])
-    sugar = st.selectbox("How often do you eat sweets or drink soda?", ["Rarely", "Sometimes", "Frequently"])
+    st.title("Build Your Prevention Plan")
+    brush = st.selectbox("How often do you brush?", ["Once", "Twice", "More than twice"])
+    sugar = st.selectbox("Sugar intake", ["Low", "Medium", "High"])
     water = st.selectbox("Do you drink water after meals?", ["Yes", "No"])
-    
-    st.subheader("Your Personalized Routine:")
-    if brushing == "Once": st.write("- Increase brushing to twice daily.")
-    else: st.write("- Great brushing frequency!")
-    if sugar == "Frequently": st.write("- Reduce sugary snacks and drinks.")
-    if water == "No": st.write("- Try rinsing your mouth with water after meals.")
+    if st.button("Generate Plan"):
+        st.write("**Morning:** Brush + rinse with water.")
+        if sugar != "Low":
+            st.write("**Midday:** Rinse with water after meals.")
+        st.write("**Night:** Brush, floss, and use mouthwash.")
     st.markdown("</div>", unsafe_allow_html=True)
 
-def case_scenarios():
+elif page == "Case Scenarios":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
     st.title("Case Scenarios")
-    cases = [
-        ("Leena notices a white spot on her tooth that wasn't there before.", 
-         ["Ignore it", "Start brushing more", "Visit a dentist"], "Visit a dentist"),
-        ("Ahmed brushes three times a day with a hard brush and has gum recession.", 
-         ["Brush more", "Use a soft brush and be gentle", "Floss harder"], "Use a soft brush and be gentle"),
-        ("Sara’s gums bleed when she flosses for the first time.", 
-         ["Stop flossing", "Keep flossing daily gently", "Brush more instead"], "Keep flossing daily gently"),
-        ("Tom has constant dry mouth and snacks often.", 
-         ["Drink soda", "Chew sugar-free gum and drink water", "Ignore it"], "Chew sugar-free gum and drink water"),
-        ("Ali brushes once daily and drinks soda before bed.", 
-         ["Continue routine", "Drink water after soda", "Brush twice daily and avoid soda at night"], "Brush twice daily and avoid soda at night")
-    ]
-    for i, (q, options, answer) in enumerate(cases):
-        st.subheader(f"Case {i+1}")
-        choice = st.radio(q, options, key=f"case{i}")
-        if st.button(f"Submit Answer {i+1}"):
-            if choice == answer:
-                st.success("✅ Correct!")
-            else:
-                st.error(f"❌ Incorrect. The correct answer is: {answer}")
+    case = st.selectbox("Choose a case", ["Ali - Soda at night", "Sara - Gums bleed", "Tom - Dry mouth", "Leena - White spot"])
+    if "Ali" in case:
+        st.write("Recommendation: Stop soda at night. Brush before bed.")
+    elif "Sara" in case:
+        st.write("Keep flossing daily. Bleeding is temporary.")
+    elif "Tom" in case:
+        st.write("Stay hydrated and limit snacks.")
+    elif "Leena" in case:
+        st.write("White spots need early fluoride intervention.")
     st.markdown("</div>", unsafe_allow_html=True)
 
-def quiz():
+elif page == "Quiz":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
-    st.title("Quiz")
-    questions = [
-        ("How long should you brush your teeth?", ["1 min", "2 mins", "5 mins"], "2 mins"),
-        ("What helps strengthen enamel?", ["Fluoride", "Salt", "Baking soda"], "Fluoride"),
-        ("Is flossing necessary?", ["Yes", "No"], "Yes"),
-        ("What food causes most decay?", ["Vegetables", "Candy", "Cheese"], "Candy"),
-        ("When should you visit a dentist?", ["When in pain", "Every 6 months", "Every 5 years"], "Every 6 months")
-    ]
-    score = 0
-    for i, (q, opts, correct) in enumerate(questions):
-        ans = st.radio(q, opts, key=f"quiz{i}")
-        if ans == correct:
-            score += 1
+    st.title("Caries Quiz")
+    q1 = st.radio("Best time to brush?", ["Morning", "After meals", "Before bed"], key="q1")
+    q2 = st.radio("What strengthens enamel?", ["Water", "Fluoride", "Milk"], key="q2")
     if st.button("Submit Quiz"):
-        st.success(f"Your score: {score} / {len(questions)}")
+        correct = (q1 == "Before bed") + (q2 == "Fluoride")
+        st.write(f"Score: {correct}/2")
     st.markdown("</div>", unsafe_allow_html=True)
 
-def faq():
+elif page == "FAQ":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
-    st.title("FAQs")
-    questions = {
-        "What is a cavity?": "A cavity is a hole in your tooth caused by tooth decay.",
-        "Can cavities heal on their own?": "No. Once a cavity forms, it needs treatment.",
-        "Is bleeding when flossing normal?": "It is common when starting. Keep flossing gently.",
-        "How often should I change my toothbrush?": "Every 3 months or after sickness.",
-        "Is it okay to skip brushing at night?": "No. Night brushing is essential.",
-        "Does fluoride cause harm?": "No, fluoride is safe and prevents decay.",
-        "Should kids use mouthwash?": "Only under supervision and if age-appropriate.",
-        "Can diet affect oral health?": "Yes. Sugar increases risk. Fiber and calcium help.",
-        "What toothbrush is best?": "A soft-bristled brush is ideal for most people.",
-        "How often should I visit the dentist?": "Every 6 months or as recommended."
+    st.title("Frequently Asked Questions")
+    faqs = {
+        "Can cavities heal?": "No, only the very early stage can be reversed.",
+        "How often to see a dentist?": "Every 6 months for checkups.",
+        "Is mouthwash required?": "Helpful but not mandatory.",
+        "Can adults get caries?": "Yes, especially with gum problems.",
+        "Why does sugar cause decay?": "It feeds bacteria that make acid."
     }
-    for q, a in questions.items():
+    for q, a in faqs.items():
         with st.expander(q):
             st.write(a)
     st.markdown("</div>", unsafe_allow_html=True)
 
-def about():
+elif page == "About":
     st.markdown("<div class='section'>", unsafe_allow_html=True)
-    st.title("About NoCaries")
+    st.title("About This Project")
     st.write("""
-        NoCaries was developed by dental students passionate about preventive care. 
-        This tool empowers patients and learners to better understand dental caries through interactive education.
-        Built using Streamlit with verified sources and public images.
+    This app was created to promote awareness and prevention of dental caries using interactive technology.
+    Designed and developed by dental students using Streamlit.
     """)
     st.markdown("</div>", unsafe_allow_html=True)
-
-# --- ROUTING ---
-if page == "Home": home()
-elif page == "What is Caries?": what_is_caries()
-elif page == "Myth Busters": myth_busters()
-elif page == "Caries Risk Calculator": caries_risk_calculator()
-elif page == "Oral Hygiene Guide": oral_hygiene_guide()
-elif page == "Prevention Plan": prevention_plan()
-elif page == "Case Scenarios": case_scenarios()
-elif page == "Quiz": quiz()
-elif page == "FAQ": faq()
-elif page == "About": about()
