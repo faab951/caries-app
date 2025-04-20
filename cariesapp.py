@@ -43,7 +43,7 @@ page = st.sidebar.selectbox("Navigate", [
 def home():
     if lang == "English":
         st.title("NoCaries: Cavity Prevention for Lifelong Oral Health")
-        st.markdown("""Welcome to **NoCaries**, a luxury bilingual platform for modern oral health education."""")
+        st.markdown("""Welcome to **NoCaries**, a luxury bilingual platform for modern oral health education.""")
     else:
         st.title("نوكاريس: الوقاية من التسوس لصحة فموية تدوم")
         st.markdown("مرحبًا بكم في **نوكاريس**، منصة ثنائية اللغة لتعليم صحة الفم بأسلوب عصري.")
