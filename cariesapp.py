@@ -1,33 +1,33 @@
 
 import streamlit as st
-st.set_page_config(page_title="NoCaries", layout="wide")  # Correct usage
+st.set_page_config(page_title="NoCaries", layout="wide")  # ✅ Single call and FIRST Streamlit command
 
-# --- STYLING ---
+# --- CUSTOM STYLING ---
 st.markdown("""
-    <style>
-    body {
-        background-color: #fefcfb;
-        font-family: 'Segoe UI', sans-serif;
-        color: #333;
-    }
-    h1, h2 {
-        color: #2e3d49;
-    }
-    .section {
-        background-color: #f2e9e4;
-        padding: 2em;
-        margin-bottom: 2em;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    .stButton>button {
-        background-color: #a88f74;
-        color: white;
-        border-radius: 8px;
-        padding: 0.5em 1.2em;
-        font-size: 1em;
-    }
-    </style>
+<style>
+body {
+    background-color: #fefcfb;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+h1, h2 {
+    color: #2e3d49;
+}
+.section {
+    background-color: #f2e9e4;
+    padding: 2em;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.stButton>button {
+    background-color: #a88f74;
+    color: white;
+    border-radius: 8px;
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+}
+</style>
 """, unsafe_allow_html=True)
 
 # --- NAVIGATION ---
@@ -36,12 +36,11 @@ page = st.sidebar.selectbox("Navigate", [
     "Oral Hygiene Guide", "Prevention Plan", "Case Scenarios", "Quiz", "FAQ", "About"
 ])
 
-# Add all working sections
 
 import streamlit as st
 
 # --- PAGE CONFIG ---
-st.set_page_config(page_title="NoCaries", layout="wide")
+# REMOVED: set_page_config (must be called only once)(page_title="NoCaries", layout="wide")
 
 # --- CUSTOM STYLING ---
 st.markdown("""
