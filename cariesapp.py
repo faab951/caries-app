@@ -1,4 +1,156 @@
 
+import streamlit as st
+
+# --- PAGE CONFIG ---
+st.set_page_config(page_title="NoCaries", layout="wide")
+
+# --- CUSTOM STYLING ---
+st.markdown("""
+<style>
+body {
+    background-color: #fefcfb;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+h1, h2 {
+    color: #2e3d49;
+}
+.section {
+    background-color: #f2e9e4;
+    padding: 2em;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.stButton>button {
+    background-color: #a88f74;
+    color: white;
+    border-radius: 8px;
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- NAVIGATION ---
+page = st.sidebar.selectbox("Navigate", [
+    "Home", "What is Caries?", "Myth Busters", "Caries Risk Calculator",
+    "Oral Hygiene Guide", "Prevention Plan", "Case Scenarios", "Quiz", "FAQ", "About"
+])
+
+# --- PAGE FUNCTIONS (HOME to ABOUT) ---
+
+import streamlit as st
+
+# --- PAGE CONFIG ---
+st.set_page_config(page_title="NoCaries", layout="wide")
+
+# --- CUSTOM STYLING ---
+st.markdown("""
+<style>
+body {
+    background-color: #fefcfb;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+}
+h1, h2 {
+    color: #2e3d49;
+}
+.section {
+    background-color: #f2e9e4;
+    padding: 2em;
+    margin-bottom: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+.stButton>button {
+    background-color: #a88f74;
+    color: white;
+    border-radius: 8px;
+    padding: 0.5em 1.2em;
+    font-size: 1em;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- NAVIGATION ---
+page = st.sidebar.selectbox("Navigate", [
+    "Home", "What is Caries?", "Myth Busters", "Caries Risk Calculator",
+    "Oral Hygiene Guide", "Prevention Plan", "Case Scenarios", "Quiz", "FAQ", "About"
+])
+
+# --- FUNCTIONS ---
+def home():
+    st.markdown("<div class='section'>", unsafe_allow_html=True)
+    st.title("Welcome to NoCaries")
+    st.image("https://cdn.pixabay.com/photo/2017/04/10/22/29/dental-care-2223462_1280.jpg", use_container_width=True)
+    st.write("""
+        **NoCaries** is an educational platform designed to help patients and the public understand how dental caries develop, how to prevent them, and how to maintain lifelong oral health.
+        Use the tools and guides throughout this app to learn, assess your risk, and build a prevention plan personalized to your needs.
+    """)
+    st.subheader("🦷 Explore:")
+    st.markdown("- **Learn about caries stages** and how they affect your teeth")
+    st.markdown("- **Busting myths** about cavities and oral hygiene")
+    st.markdown("- **Interactive risk calculators** and prevention plans")
+    st.markdown("- **Case scenarios and quizzes** to test your knowledge")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+def what_is_caries():
+    st.markdown("<div class='section'>", unsafe_allow_html=True)
+    st.title("What is Dental Caries?")
+    st.write("""
+        Dental caries, or tooth decay, is a breakdown of tooth structure caused by acid-producing bacteria. It progresses through multiple stages if left untreated.
+    """)
+    stages = {
+        "White Spot": (
+            "https://upload.wikimedia.org/wikipedia/commons/7/74/White_spot_lesions_on_teeth.jpg",
+            "This is the earliest visible sign of enamel demineralization. A white, chalky area appears due to mineral loss."
+        ),
+        "Enamel Decay": (
+            "https://upload.wikimedia.org/wikipedia/commons/1/12/Enamel_Caries.jpg",
+            "The caries process has penetrated the enamel surface. At this point, the damage is irreversible."
+        ),
+        "Dentin Involvement": (
+            "https://upload.wikimedia.org/wikipedia/commons/b/bb/Dental_caries_dentin.jpg",
+            "Decay moves faster once it enters dentin. Sensitivity may begin."
+        ),
+        "Pulp Exposure": (
+            "https://upload.wikimedia.org/wikipedia/commons/0/0b/Pulpitis.jpg",
+            "When decay reaches the pulp, it often causes pain and inflammation. Root canal treatment may be needed."
+        ),
+        "Abscess": (
+            "https://upload.wikimedia.org/wikipedia/commons/f/f6/Tooth_abscess.jpg",
+            "An abscess is a severe infection. This stage often causes swelling and requires urgent treatment."
+        )
+    }
+    stage = st.selectbox("Select a stage to explore:", [""] + list(stages.keys()))
+    if stage:
+        img, text = stages[stage]
+        st.image(img, use_container_width=True)
+        st.write(text)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+def myth_busters():
+    st.markdown("<div class='section'>", unsafe_allow_html=True)
+    st.title("Caries Myth Busters")
+    myths = {
+        "Only sugar causes cavities.": "False. While sugar is a major contributor, any fermentable carbohydrate, including bread and fruit, can feed bacteria and produce acid.",
+        "If it doesn’t hurt, it’s not a cavity.": "False. Many cavities are painless in early stages and only cause pain when deep.",
+        "Fluoride is dangerous.": "False. Fluoride in recommended doses is safe and proven to reduce decay.",
+        "Brushing harder cleans better.": "False. Gentle brushing with correct technique is more effective and safer for your gums.",
+        "Kids are the only ones who get cavities.": "False. Adults, especially those with gum recession or dry mouth, are at high risk too."
+    }
+    for myth, fact in myths.items():
+        with st.expander(myth):
+            st.write(f"✅ {fact}")
+    st.markdown("</div>", unsafe_allow_html=True)
+
+# Placeholder for remaining functions — they will be written below in next cell
+
+st.markdown("<div class='section'>", unsafe_allow_html=True)
+st.title("Loading...")
+st.markdown("</div>", unsafe_allow_html=True)
+
 def caries_risk_calculator():
     st.markdown("<div class='section'>", unsafe_allow_html=True)
     st.title("Caries Risk Calculator")
