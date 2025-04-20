@@ -1,11 +1,10 @@
-
 import streamlit as st
-
-# --- Language Toggle ---
-lang = st.sidebar.radio("Language / اللغة", ["English", "Arabic"])
 
 # --- Page Config ---
 st.set_page_config(page_title="NoCaries", layout="wide")
+
+# --- Language Toggle ---
+lang = st.sidebar.radio("Language / اللغة", ["English", "Arabic"])
 
 # --- Custom CSS for luxury style ---
 st.markdown("""
