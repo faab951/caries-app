@@ -64,7 +64,7 @@ elif choice == "How to Prevent Caries":
     - Brush twice daily for two minutes using fluoride toothpaste.
     - Floss daily to clean between teeth.
     - Use fluoride treatments or mouth rinses if recommended.
-    - Reduce intake of sugary and sticky foods.
+    - Reduce intake of sugary and acidic food/drinks.
     - Drink plenty of water, especially fluoridated water.
     - Visit the dentist every 6 months for professional cleaning and early detection.
     - Consider dental sealants for children to protect molars.
@@ -76,7 +76,7 @@ elif choice == "Brushing and Flossing Techniques":
     st.image(
         "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toothbrushing_1.jpg",
         caption="Proper Brushing Technique",
-        use_column_width=True
+        use_container_width=True
     )
     st.write(
         "Place the toothbrush at a 45-degree angle to the gums. Move the brush back and forth gently in short strokes. "
@@ -87,7 +87,7 @@ elif choice == "Brushing and Flossing Techniques":
     st.image(
         "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flossing_1.jpg",
         caption="Proper Flossing Technique",
-        use_column_width=True
+        use_container_width=True
     )
     st.write(
         "Break off about 18 inches of floss and wind most of it around each middle finger, leaving about an inch to work with. "
