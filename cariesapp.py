@@ -73,22 +73,12 @@ elif choice == "How to Prevent Caries":
 elif choice == "Brushing and Flossing Techniques":
     st.header("Brushing and Flossing Techniques")
     st.subheader("Brushing Technique (Bass Method)")
-    st.image(
-        "https://upload.wikimedia.org/wikipedia/commons/a/a7/Toothbrushing_1.jpg",
-        caption="Proper Brushing Technique",
-        use_container_width=True
-    )
     st.write(
         "Place the toothbrush at a 45-degree angle to the gums. Move the brush back and forth gently in short strokes. "
         "Brush the outer surfaces, the inner surfaces, and the chewing surfaces of the teeth. "
         "For the inside surfaces of the front teeth, tilt the brush vertically and make several up-and-down strokes."
     )
     st.subheader("Flossing Technique")
-    st.image(
-        "https://upload.wikimedia.org/wikipedia/commons/2/2f/Flossing_1.jpg",
-        caption="Proper Flossing Technique",
-        use_container_width=True
-    )
     st.write(
         "Break off about 18 inches of floss and wind most of it around each middle finger, leaving about an inch to work with. "
         "Gently slide it between the teeth, curve the floss into a C-shape against the side of the tooth, and rub it up and down."
